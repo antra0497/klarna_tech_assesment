@@ -2,12 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <style>
+        .header {
+            background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(34, 23, 23, 0.0)),
+            url("https://cdn.shopify.com/s/files/1/0015/1886/2449/files/klarna-page-banner-1800px_2000x_507605f7-f405-4dec-9e6c-e1e728427c1b.png?v=1606241219");
+            background-position: 50%;
+            background-size: cover;
+            padding: 80px 0;
+            display: grid;
+            justify-content: center;
+        }
+        .head_tittle{
+            justify-content: center;
+            background-color: #fbb4c4;
+            text-align: center;
+            padding: 1px;            
+        }
+        .righttab{
+            overflow-y: scroll;
+            justify-content: center;
+            height: 380px;
+        }
+        /* Create two equal columns that floats next to each other */
+        .leftcolumn {
+        flex: 60%;
+        float: left;
+        align-items: center;
+        padding: 10px;
+        height: 430px; /* Should be removed. Only for demonstration */
+        }
+        .rightcolumn {
+        flex: 40%;
+        float: left;
+        align-items: center;
+        padding: 10px;
+        height: 430px; /* Should be removed. Only for demonstration */
+        }
+        .row {
+        display: flex;
+        }
+        .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+        height:390px;
+        }
+        .button{
+            padding:1%;
+            padding-right: 2%;;
+        }
+        button{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            height: 35px;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            border: 4px;
+            border-color: rgba(0, 0, 0, 0);
+        }
+        table{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            background-color: #f1f1f1;
+            text-align: center;
+            width:100%;
+        }
+        table th{
+            padding: 2px;
+        }
+        table tr:nth-child(even){
+            background-color: #f2f2f2;
+            padding: 3px;
+        }
+        table tr:hover {
+            background-color: #ddd;
+            padding: 3px;
+        }
+        
+    </style>
+    <title>Predictions</title>
 </head>
 <body>
 
-{% for table in tables %}
-            {{ table|safe }}
-{% endfor %}
-</body>
+    <div class="header"></div>
+    <div class="head_tittle">
+        <h1> Predictions Results</h1>
+    </div>
+    <div class="row">
+        <div class="leftcolumn" style="background-color:rgb(245, 223, 223);">
+            <div class ='righttab'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>UUID</th>
+                            <th>Defaulters Tag</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in tables %}
+                        <tr>
+                           <td>{{row['uuid']}}</td>
+                           <td>{{row['pd']}}</td>
+                        </tr>                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="button">
+                <button type="button" name="myButton" autofocus>Download CSV</button>
+            </div>
+            
+            
+        </div>
+        <div class="rightcolumn" style="background-color:rgb(245, 223, 223);">
+            <div class="card">
+                <h3>Display Log</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+        </div>
+      </div>
+
+
+
+
+
+
+    <div>
+        
+    </div>
+    
+    
+
+    </body>
 </html>

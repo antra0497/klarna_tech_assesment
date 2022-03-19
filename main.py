@@ -41,22 +41,12 @@ def form():
 @app.route('/', methods=['POST'])
 def get_data():
     if request.method == 'POST':
-        file = request.files['file']
-
-        if file.filename != '':
-            file_path = path+'\\file.csv'
-            file.save(file_path)
-        
-        return(redirect(url_for('results')))
-
-@app.route('/results')
-def results():
-    file_path = path+'\\file.csv'
-    df = pd.read_csv(file_path)
-    result= predict(df)
-    res = pd.DataFrame.from_dict(result, orient='columns')
+        file = request.files['file']   
+        df = pd.read_csv(file)
+        result= predict(df)
+        res = pd.DataFrame.from_dict(result, orient='columns')
     
-    return render_template('results.html', tables =[res.to_html(classes='data', header="true")])    
+    return render_template('results.html', tables =res.to_dict(orient='records'))    
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port = 9696)

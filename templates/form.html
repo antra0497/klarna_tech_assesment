@@ -1,13 +1,57 @@
 <!doctype html>
 <html>
   <head>
+    <style>
+      body {
+        color:black;
+        align-content: center;
+      }
+      img{
+        max-width:fit-content;
+      }
+      .header {
+        background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(34, 23, 23, 0.0)),
+          url("https://cdn.shopify.com/s/files/1/0015/1886/2449/files/klarna-page-banner-1800px_2000x_507605f7-f405-4dec-9e6c-e1e728427c1b.png?v=1606241219");
+        background-position: 50%;
+        background-size: cover;
+        padding: 150px 0;
+        display: grid;
+        justify-content: center;
+      }
+      .form{
+        padding: 15px 0;
+        display: grid;
+        justify-content: center;
+        border: 3px dashed #fbb4c4;
+      }
+      input[type = submit]{
+        background: #fbb4c4;
+        border-radius: 4px;
+        border-color: #fbb4c4;
+        color: black;
+        height: 45px;
+        width: 300px;
+      }
+
+    </style>
     <title>Defaulters Prediction</title>
   </head>
+  
   <body>
-    <h1>Upload your CSV file</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
+    <div class = 'header'>     
+    </div>
+
+    <div class = 'form'>
+      <h1>Upload your CSV file</h1>
+
+      <form method="POST" action="" enctype="multipart/form-data">
       <p><input type="file" name="file"></p>
       <p><input type="submit" value="Submit"></p>
     </form>
+    
+    </div>
+
+
+    
   </body>
 </html>
