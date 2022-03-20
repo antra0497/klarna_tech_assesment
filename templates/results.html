@@ -23,6 +23,10 @@
             justify-content: center;
             height: 380px;
         }
+        .lefttab{
+            overflow-y: scroll;
+            justify-content:left;
+        }
         /* Create two equal columns that floats next to each other */
         .leftcolumn {
         flex: 60%;
@@ -52,6 +56,10 @@
             padding:1%;
             padding-right: 2%;;
         }
+        .log{
+            text-align: left;
+    
+        }
         button{
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             height: 35px;
@@ -63,8 +71,11 @@
         table{
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             background-color: #f1f1f1;
-            text-align: center;
+            text-align:center;
             width:100%;
+        }
+        table thead{
+            padding:5px;
         }
         table th{
             padding: 2px;
@@ -116,9 +127,21 @@
         </div>
         <div class="rightcolumn" style="background-color:rgb(245, 223, 223);">
             <div class="card">
-                <h3>Display Log</h3>
-                <p>Some text</p>
-                <p>Some text</p>
+                <div class ='lefttab'>
+                    <table class="log">
+                        <thead>
+                            <tr>
+                                <th>Display Log</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log in logs %}
+                            <tr>
+                               <td>{{log}}</td>
+                            </tr>                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
               </div>
         </div>
       </div>

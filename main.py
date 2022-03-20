@@ -19,13 +19,13 @@ def predict(df):
     with open(model_path, 'rb') as f_in:
         model = pickle.load(f_in)
         f_in.close()
-    predictions = predict_data(df, model)
+    predictions, log = predict_data(df, model)
 
     result = {
         'uuid': list(uuid_list),
         'pd' : list(predictions)
     }
-    return result
+    return result, log
 
 ##creating a flask app and naming it "app"
 app = Flask('app')
@@ -43,10 +43,10 @@ def get_data():
     if request.method == 'POST':
         file = request.files['file']   
         df = pd.read_csv(file)
-        result= predict(df)
+        result, log= predict(df)
         res = pd.DataFrame.from_dict(result, orient='columns')
     
-    return render_template('results.html', tables =res.to_dict(orient='records'))    
+    return render_template('results.html', tables =res.to_dict(orient='records'), logs =log)    
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port = 9696)

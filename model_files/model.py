@@ -17,17 +17,19 @@ def drop_nan_col(data):
     elif data[col].isnull().sum() > threshold : #dropping the column if has NaN more than threshold
       data= data.drop(columns=col, axis=1)
       counter +=1
-  print('{} columns droped and size is {}'.format(counter, data.shape))
-  return data
+  l ='{} columns were droped, they had more than 40% data missing, New shape of data is {}'.format(counter, data.shape)
+  return data, l
 
 def fill_nan(data):
-    for col in data.columns:
-        if col == 'default': #skipping the default column
-            pass
-        elif data[col].isnull().sum()!=0:
-            data[col] = data[col].fillna(0)
-    print(data.shape)      
-    return data
+  count =0
+  for col in data.columns:
+    if col == 'default': #skipping the default column
+      pass
+    elif data[col].isnull().sum()!=0:
+      data[col] = data[col].fillna(0)
+      count +=1
+  l='NaN values in {} columns filled with zero'.format(count)   
+  return data, l
 
 def convert_c2n(data):
   counter =0
@@ -36,9 +38,8 @@ def convert_c2n(data):
     if data[col].dtype == 'O' or data[col].dtype == 'bool':
       data[col]= encoder.fit_transform(data[col].values.reshape(-1,1))
       counter +=1
-  print('{} columns converted to numerical '.format(counter))
-  print(data.shape) 
-  return data  
+  l ='{} columns converted from Categorical/Boolean to Numerical '.format(counter)
+  return data, l
 
 def standard_scaling(data, test_flag = False):
 
@@ -48,11 +49,10 @@ def standard_scaling(data, test_flag = False):
     x= x_std.fit_transform(data)
     
     x =pd.DataFrame(x)
-    print(x.shape)
-
     return x
 
 def dimensionality_reduction(data):
+
     print(type(data))
     pca = PCA(n_components=26) # with variance of 95%
     principalComponents = pca.fit_transform(data)
@@ -63,30 +63,37 @@ def dimensionality_reduction(data):
     print('\n')
     print('Visulating the variance vs no.of components')
 
-    return principalComponents
+    v ='Explained Variance is {}'.format(pca.explained_variance_)
+    nc ='Count of PCA components: {}'.format(pca.n_components_)
+    return principalComponents, v, nc
 
 def data_prep(data):
+  log=['.',] # list to maintain log
+  log.append('Original shape of data: {}'.format(data.shape))
 
-  df = drop_nan_col(data)
-
-  df_c = convert_c2n(df)
-
-  df_n = fill_nan(df_c)
-
+  log.append('DATA PROCESSING')
+  df, _ = drop_nan_col(data)
+  log.append(_)
+  df_c, _ = convert_c2n(df)
+  log.append(_)  
+  df_n, _ = fill_nan(df_c)
+  log.append(_)  
   df_norm = standard_scaling(df_n, test_flag=True)
-
-  df_reduced = dimensionality_reduction(df_norm)
-
-  return df_reduced
+  df_reduced, v, nc= dimensionality_reduction(df_norm)
+  log.append('DIMENTIONALITY REDUCTION')
+  log.append(nc)
+  log.append(v)
+  
+  return df_reduced, log
 
 def predict_data(config, model):
 
     df = pd.DataFrame(config)
 
-    df_processed = data_prep(df)
+    df_processed, log = data_prep(df)
     y_pred = model.predict(df_processed)
 
-    return y_pred
+    return y_pred, log
 
 
   
