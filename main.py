@@ -7,6 +7,9 @@ from flask import Flask, request, render_template, send_file, make_response
 path = os.getcwd()
 os.chdir(path)
 
+##creating a flask app and naming it "app"
+app = Flask('app')
+
 def predict(df):   
     '''
     Input: Dataframe
@@ -32,9 +35,6 @@ def predict(df):
     }
     return result, log
 
-##creating a flask app and naming it "app"
-app = Flask('app')
-
 @app.route('/test')
 def test():
     return ('Pinging Model Application!! from {}'.format(path))
@@ -58,6 +58,3 @@ def get_data():
         #redenting the result.html with the result and the log 
         return render_template('results.html', tables =res.to_dict(orient='records'), logs =log)
  
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port = 9696)
