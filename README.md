@@ -13,7 +13,7 @@ This is a simple flask application to do prediction for Credit Defaulter:
 
 **Note: minimum requirement for test data are as follows:**
 
-    1. Atleast 100 rows of test data
+    1. Atleast 50 rows of test data
     2. .csv file format only
 
 # Model Info.
