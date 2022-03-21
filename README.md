@@ -39,7 +39,7 @@ Following models were trained and tested on validation data, and best model was 
 
 For more details refer to [Jupyter File](https://github.com/antra0497/klarna_tech_assesment/blob/main/klarna_assignment.ipynb) 
 
-# Application is deployed on Heruko:
+# Application is deployed on Heroku:
 
 Link: https://klarna-pred.herokuapp.com/
 
