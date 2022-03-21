@@ -18,7 +18,7 @@ def predict(df):
     uuid_list = df['uuid']  
 
     #defining the model file path  
-    model_path = path + '\model_files\lg_model3_pkl' 
+    model_path ='\model_files\lg_model3_pkl' 
 
     #reading the model file
     with open(model_path, 'rb') as f_in:
@@ -54,7 +54,7 @@ def get_data():
         #calling the predict function defined above
         result, log= predict(df)
         res = pd.DataFrame.from_dict(result, orient='columns')
-        res.to_csv(path+'/static/output.csv') 
+        res.to_csv('/static/output.csv') 
         #redenting the result.html with the result and the log 
         return render_template('results.html', tables =res.to_dict(orient='records'), logs =log)
  
