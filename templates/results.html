@@ -26,6 +26,8 @@
         .lefttab{
             overflow-y: scroll;
             justify-content:left;
+            height: 380px;
+            
         }
         /* Create two equal columns that floats next to each other */
         .leftcolumn {
@@ -57,7 +59,9 @@
             padding-right: 2%;;
         }
         .log{
+            padding: 2%;
             text-align: left;
+            height: 380px;
     
         }
         button{
@@ -120,18 +124,20 @@
                 
             </div>
             <div class="button">
-                <button type="button" name="myButton" autofocus>Download CSV</button>
+                <a href="/static/output.csv">
+                    <button type="button" name="myButton" autofocus >Download CSV</button>
+                </a>
             </div>
             
             
         </div>
         <div class="rightcolumn" style="background-color:rgb(245, 223, 223);">
-            <div class="card">
-                <div class ='lefttab'>
+            <div class ='lefttab'>               
                     <table class="log">
                         <thead>
                             <tr>
-                                <th>Display Log</th>                                
+                                <th>Display Log</th>
+                                <tr>           </tr>                                
                             </tr>
                         </thead>
                         <tbody>
@@ -142,20 +148,10 @@
                             {% endfor %}
                         </tbody>
                     </table>
-              </div>
-        </div>
-      </div>
-
-
-
-
-
-
-    <div>
-        
-    </div>
-    
-    
-
+              
+                </div>
+            </div>
+        <div>        
+        </div>   
     </body>
 </html>
